@@ -58,7 +58,6 @@ FKSUDDAPre/
 ├── model/                  # 各类模型实现
 ├── data/                   # 数据存放目录
 ├── train_DDA.py            # 主训练与预测入口
-├── requirements.txt
 └── README.md
 ```
 
