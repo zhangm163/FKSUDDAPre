@@ -46,6 +46,8 @@ FKSUDDAPre模型通过分子结构与疾病网络多模态特征融合，结合�
 - matplotlib
 - seaborn
 - scipy
+- lime
+- PyQt5
 
 
 ## 目录结构
@@ -111,7 +113,6 @@ python train_DDA.py
 ```
 - 默认读取`data/after_dimension_reduction/`下的特征文件
 - 结果输出到`data/results/prediction_results.csv`
-```
 
 ---
 ## 预测器使用说明（About Predictor）
