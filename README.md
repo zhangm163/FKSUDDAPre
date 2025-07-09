@@ -111,4 +111,20 @@ python train_DDA.py
 ```
 - 默认读取`data/after_dimension_reduction/`下的特征文件
 - 结果输出到`data/results/prediction_results.csv`
+```
+
+---
+## 预测器使用说明（About Predictor）
+
+### Download and Setup
+The predictor can be downloaded at  https://pan.baidu.com/s/15Ifynpi2r_ABVGUNdaYMug?pwd=tg9x 提取码: tg9x  
+Download and get a zip package，unzip it ，find the predictor.exe and click it to run the predictor.  
+To facilitate online prediction, we have developed an online predictor based on Python.
+
+### How to Use Predictor
+First, click the "Select Model" button at the top of the interface and choose the local model file. The file format should be "pkl".  
+After selecting the model file, choose the prediction file. Click the "Select Data" button at the top of the interface and choose the local data file. The file format should be "csv".  
+After selecting the test file, click "Start Prediction" and wait for the prediction results. The results will be displayed in a list format on the interface, as shown in Figure 5-6. The list contains 4 columns: the first column is the drug ID, the second is the disease ID, the third column is the predicted score, and the fourth column is the predicted label, represented as "negative" or "positive".  
+There is a button labeled "Save Results" at the top of the interface. By clicking this button, users can easily save the model's prediction results in CSV file format to their local computer.  
+
 
