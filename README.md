@@ -100,7 +100,7 @@ python ./data/undersample/merge.py
 ### 4. 特征选择/降维
 以F检验为例：
 ```bash
-python dimension_reduction/f_classif.py --input ./data/after_dimension_reduction/KSU_Hamming_balanced.csv --output ./data/after_dimension_reduction/140/f_classif_KSU_Hamming140.csv
+python dimension_reduction/f_classif.py --input ./data/after_dimension_reduction/KSU_Hamming.csv --output ./data/after_dimension_reduction/140/f_classif_KSU_Hamming140.csv
 ```
 
 ---
