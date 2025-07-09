@@ -80,17 +80,21 @@ python extract/features.py --input ./data/B-datasets/MeSHFeatureGeneratedByDeepW
 
 ### 2. 特征拼接与样本构建
 ```bash
-python dataprocess/generate_candidate_drug.py --drug ./data/B-datasets/feature_extraction/Drug_mol2vec.csv --disease ./data/B-datasets/feature_extraction/NEWDiseaseFeature.csv --pairs ./data/B-datasets/DrugDiseaseAssociationNumber.csv --output ./data/after_dimension_reduction/merged_features.csv
+python dataprocess/association.py --drug ./data/B-datasets/feature_extraction/Drug_mol2vec.csv --disease ./data/B-datasets/feature_extraction/NEWDiseaseFeature.csv --pairs ./data/B-datasets/DrugDiseaseAssociationNumber.csv --output ./data/original_samples/association.csv
 ```
-
+```bash
+python dataprocess/disassociation.py --drug ./data/B-datasets/feature_extraction/Drug_mol2vec.csv --disease ./data/B-datasets/feature_extraction/NEWDiseaseFeature.csv --pairs ./data/B-datasets/DrugDiseasedisAssociationNumber.csv --output ./data/original_samples/disassociation.csv
+```
 ---
 
 ### 3. 数据集平衡（KSU等方法）
 以汉明距离为例：
 ```bash
-python undersample/KSU_Hamming.py --input ./data/after_dimension_reduction/merged_features.csv --output ./data/after_dimension_reduction/KSU_Hamming_balanced.csv
+python undersample/KSU_Hamming.py --input ./data/original_samples/disassociation.csv --output ./data/undersample/disAssociaton/diaKSU_Hamming.csv
 ```
-
+```bash
+python ./data/undersample/merge.py 
+```
 ---
 
 ### 4. 特征选择/降维
