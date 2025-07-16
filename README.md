@@ -28,7 +28,7 @@ The FKSUDDAPre model enables efficient prediction of drug–disease associations
   - Drug–Disease Pairs with Labels: Association annotations (e.g., DrugDiseaseAssociationNumber.csv)
 
 - **Output**  
-  - Predicted probabilities or binary classification results of drug–disease associations (e.g., prediction_results.csv)
+  - Predicted probabilities or binary classification results of drug–disease associations (e.g.,prediction_results.csv)
 
 ---
 
@@ -118,7 +118,8 @@ python train_DDA.py
 ## About Predictor
 
 ### Download and Setup
-The predictor can be downloaded at  https://pan.baidu.com/s/15Ifynpi2r_ABVGUNdaYMug?pwd=tg9x 提取码: tg9x  
+The predictor can be downloaded at  https://pan.baidu.com/s/15Ifynpi2r_ABVGUNdaYMug?pwd=tg9x 
+Access code: tg9x  
 Download and get a zip package，unzip it ，find the predictor.exe and click it to run the predictor.  
 To facilitate online prediction, we have developed an online predictor based on Python.
 
