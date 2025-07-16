@@ -1,38 +1,38 @@
-# FKSUDDAPre：基于F检验与AMDKSU重采样技术的药物-疾病关联预测研究及可解释性分析
+# FKSUDDAPre: A Drug–Disease Association Prediction Framework Based on F-TEST Feature Selection and AMDKSU Resampling with Interpretability Analysis
 
-## 项目简介
-FKSUDDAPre模型通过分子结构与疾病网络多模态特征融合，结合集成学习方法，实现药物-疾病关联的高效预测。模型包含特征提取、数据集平衡、特征选择和集成预测四大核心模块，支持从原始数据到最终预测结果的全流程自动化。
-
----
-
-## 功能模块
-1. **特征提取模块**  
-   - 药物分子：Mol2vec对SMILES序列进行无监督表示，生成300维分子嵌入向量。
-   - 疾病网络：DeepWalk在MeSH关系DAG上生成64维拓扑嵌入向量。
-
-2. **平衡数据集构建模块**  
-   - 改进KSU策略，结合K-means聚类，动态选择距离度量，缓解类别不平衡。
-
-3. **关键特征选择模块**  
-   - F检验等方法筛选判别力最强的特征。
-
-4. **集成学习预测模块**  
-   - 集成XGBoost、决策树、随机森林等多种基学习器。
+## Project Overview
+The FKSUDDAPre model enables efficient prediction of drug–disease associations by integrating multimodal features from drug molecular structures and disease networks, combined with ensemble learning strategies. The framework comprises four core modules: feature extraction, dataset balancing, feature selection, and ensemble prediction, supporting an end-to-end pipeline from raw data to final prediction results.
 
 ---
 
-## 数据输入与输出
-- **输入**  
-  - 药物：SMILES表达式（如`DrugInformation.csv`）
-  - 疾病：MeSH术语DAG结构（如`MeSHFeatureGeneratedByDeepWalk.csv`）
-  - 药物-疾病配对及标签（如`DrugDiseaseAssociationNumber.csv`）
+## Functional Modules
+1. **Feature Extraction Module**  
+   - Drug Molecules: Uses Mol2vec to generate 300-dimensional molecular embedding vectors from SMILES sequences in an unsupervised manner.
+   - Disease Network: Employs DeepWalk on MeSH DAGs to produce 64-dimensional topological embedding vectors.
 
-- **输出**  
-  - 药物-疾病关联预测概率或二分类结果（如`prediction_results.csv`）
+2. **Balanced Dataset Construction Module**  
+   - Implements an improved KSU strategy combining K-means clustering and dynamic distance metric selection to alleviate class imbalance.
+
+3. **Key Feature Selection Module**  
+   - Applies F-test and other statistical methods to select features with the highest discriminative power.
+
+4. **Ensemble Learning Prediction Module**  
+   - Integrates multiple base learners including XGBoost, Decision Tree, and Random Forest to enhance prediction performance and robustness.
 
 ---
 
-## 环境依赖
+## Data Input and Output
+- **Input**  
+  - Drugs: SMILES representations (e.g., DrugInformation.csv)
+  - Diseases: MeSH term DAG structures (e.g., MeSHFeatureGeneratedByDeepWalk.csv)
+  - Drug–Disease Pairs with Labels: Association annotations (e.g., DrugDiseaseAssociationNumber.csv)
+
+- **Output**  
+  - Predicted probabilities or binary classification results of drug–disease associations (e.g., prediction_results.csv)
+
+---
+
+## Requirements:
 - Python >= 3.7
 - numpy
 - pandas
@@ -50,37 +50,37 @@ FKSUDDAPre模型通过分子结构与疾病网络多模态特征融合，结合�
 - PyQt5
 
 
-## 目录结构
+## Directory structure
 ```
 FKSUDDAPre/
-├── extract/                # 特征提取相关脚本
-├── dataprocess/            # 数据拼接与预处理
-├── undersample/            # 数据集平衡方法
-├── dimension_reduction/    # 特征选择与降维
-├── model/                  # 各类模型实现
-├── data/                   # 数据存放目录
-├── train_DDA.py            # 主训练与预测入口
+├── extract/                # Feature extraction related scripts
+├── dataprocess/            # Data concatenation and preprocessing
+├── undersample/            # Data set balancing 
+├── dimension_reduction/    # Feature selection and dimensionality reduction
+├── model/                  # Implementation of various models
+├── data/                   # datasets
+├── train_DDA.py            # Main training and prediction entry point
 └── README.md
 ```
 
 ---
 
-## 使用方法
+## How to use
 
-### 1. 特征提取
-#### 1.1 药物分子特征（Mol2vec）
+### 1. Feature extraction
+#### 1.1 Drug molecule features (Mol2vec)
 ```bash
 python extract/mol2vec.py --input ./data/B-datasets/DrugInformation.csv --output ./data/B-datasets/feature_extraction/Drug_mol2vec.csv
 ```
 
-#### 1.2 疾病网络特征（DeepWalk）
+#### 1.2 disease networks features（DeepWalk）
 ```bash
 python extract/features.py --input ./data/B-datasets/MeSHFeatureGeneratedByDeepWalk.csv --output ./data/B-datasets/feature_extraction/NEWDiseaseFeature.csv
 ```
 
 ---
 
-### 2. 特征拼接与样本构建
+### 2. Feature Concatenation and Sample Construction
 ```bash
 python dataprocess/association.py --drug ./data/B-datasets/feature_extraction/Drug_mol2vec.csv --disease ./data/B-datasets/feature_extraction/NEWDiseaseFeature.csv --pairs ./data/B-datasets/DrugDiseaseAssociationNumber.csv --output ./data/original_samples/association.csv
 ```
@@ -89,8 +89,8 @@ python dataprocess/disassociation.py --drug ./data/B-datasets/feature_extraction
 ```
 ---
 
-### 3. 数据集平衡（KSU等方法）
-以汉明距离为例：
+### 3. Balanced Dataset Construction
+Using Hamming Distance as an example:
 ```bash
 python undersample/KSU_Hamming.py --input ./data/original_samples/disassociation.csv --output ./data/undersample/disAssociaton/diaKSU_Hamming.csv
 ```
@@ -99,23 +99,23 @@ python ./data/undersample/merge.py
 ```
 ---
 
-### 4. 特征选择/降维
-以F检验为例：
+### 4. Feature Selection / Dimensionality Reduction
+Using F-test as an example:
 ```bash
 python dimension_reduction/f_classif.py --input ./data/after_dimension_reduction/KSU_Hamming.csv --output ./data/after_dimension_reduction/140/f_classif_KSU_Hamming140.csv
 ```
 
 ---
-### 5. 模型训练与预测
-直接运行主程序：
+### 5. Model Training and Prediction
+Run the main script directly:
 ```bash
 python train_DDA.py
 ```
-- 默认读取`data/after_dimension_reduction/`下的特征文件
-- 结果输出到`data/results/prediction_results.csv`
+- Run the main script directly:`data/after_dimension_reduction/`
+- Prediction results are saved to`data/results/prediction_results.csv`
 
 ---
-## 预测器使用说明（About Predictor）
+## About Predictor
 
 ### Download and Setup
 The predictor can be downloaded at  https://pan.baidu.com/s/15Ifynpi2r_ABVGUNdaYMug?pwd=tg9x 提取码: tg9x  
