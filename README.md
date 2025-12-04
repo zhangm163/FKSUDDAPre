@@ -48,6 +48,7 @@ The FKSUDDAPre model enables efficient prediction of drug–disease associations
 - scipy
 - lime
 - PyQt5
+- hyperfast
 
 
 ## Directory structure
@@ -68,9 +69,11 @@ FKSUDDAPre/
 ## How to use
 
 ### 1. Feature extraction
-#### 1.1 Drug molecule features (Mol2vec)
+#### 1.1 Drug molecule features (Mol2vec_k-bert)
 ```bash
 python extract/mol2vec.py --input ./data/B-datasets/DrugInformation.csv --output ./data/B-datasets/feature_extraction/Drug_mol2vec.csv
+python extract/k-bert.py
+python data/B-datasets/feature/mol2vec_kbert.py
 ```
 
 #### 1.2 disease networks features（DeepWalk）
@@ -116,13 +119,12 @@ python train_DDA.py
 
 ---
 ## About Predictor
-
 ### Download and Setup
 The predictor can be downloaded at  https://pan.baidu.com/s/15Ifynpi2r_ABVGUNdaYMug?pwd=tg9x 
 Access code: tg9x  
 Download and get a zip package，unzip it ，find the predictor.exe and click it to run the predictor.  
 To facilitate online prediction, we have developed an online predictor based on Python.
-
+The predictor can be downloaded at 
 ### How to Use Predictor
 First, click the "Select Model" button at the top of the interface and choose the local model file. The file format should be "pkl".  
 After selecting the model file, choose the prediction file. Click the "Select Data" button at the top of the interface and choose the local data file. The file format should be "csv".  
