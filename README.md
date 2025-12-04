@@ -3,35 +3,6 @@
 ## Project Overview
 The FKSUDDAPre model enables efficient prediction of drug–disease associations by integrating multimodal features from drug molecular structures and disease networks, combined with ensemble learning strategies. The framework comprises four core modules: feature extraction, dataset balancing, feature selection, and ensemble prediction, supporting an end-to-end pipeline from raw data to final prediction results.
 
----
-
-## Functional Modules
-1. **Feature Extraction Module**  
-   - Drug Molecules: Uses Mol2vec to generate 300-dimensional molecular embedding vectors from SMILES sequences in an unsupervised manner.
-   - Disease Network: Employs DeepWalk on MeSH DAGs to produce 64-dimensional topological embedding vectors.
-
-2. **Balanced Dataset Construction Module**  
-   - Implements an improved KSU strategy combining K-means clustering and dynamic distance metric selection to alleviate class imbalance.
-
-3. **Key Feature Selection Module**  
-   - Applies F-test and other statistical methods to select features with the highest discriminative power.
-
-4. **Ensemble Learning Prediction Module**  
-   - Integrates multiple base learners including XGBoost, Decision Tree, and Random Forest to enhance prediction performance and robustness.
-
----
-
-## Data Input and Output
-- **Input**  
-  - Drugs: SMILES representations (e.g., DrugInformation.csv)
-  - Diseases: MeSH term DAG structures (e.g., MeSHFeatureGeneratedByDeepWalk.csv)
-  - Drug–Disease Pairs with Labels: Association annotations (e.g., DrugDiseaseAssociationNumber.csv)
-
-- **Output**  
-  - Predicted probabilities or binary classification results of drug–disease associations (e.g.,prediction_results.csv)
-
----
-
 ## Requirements:
 - Python >= 3.7
 - numpy
@@ -73,7 +44,7 @@ FKSUDDAPre/
 ```bash
 python extract/mol2vec.py --input ./data/B-datasets/DrugInformation.csv --output ./data/B-datasets/feature_extraction/Drug_mol2vec.csv
 python extract/k-bert.py
-python data/B-datasets/feature/mol2vec_kbert.py
+python data/B-datasets/feature_extraction/mol2vec_kbert.py
 ```
 
 #### 1.2 disease networks features（DeepWalk）
@@ -85,7 +56,7 @@ python extract/features.py --input ./data/B-datasets/MeSHFeatureGeneratedByDeepW
 
 ### 2. Feature Concatenation and Sample Construction
 ```bash
-python dataprocess/association.py --drug ./data/B-datasets/feature_extraction/Drug_mol2vec.csv --disease ./data/B-datasets/feature_extraction/NEWDiseaseFeature.csv --pairs ./data/B-datasets/DrugDiseaseAssociationNumber.csv --output ./data/original_samples/association.csv
+python dataprocess/association.py --drug ./data/B-datasets/feature_extraction/DrugFeature.csv --disease ./data/B-datasets/feature_extraction/NEWDiseaseFeature.csv --pairs ./data/B-datasets/DrugDiseaseAssociationNumber.csv --output ./data/original_samples/association.csv
 ```
 ```bash
 python dataprocess/disassociation.py --drug ./data/B-datasets/feature_extraction/Drug_mol2vec.csv --disease ./data/B-datasets/feature_extraction/NEWDiseaseFeature.csv --pairs ./data/B-datasets/DrugDiseasedisAssociationNumber.csv --output ./data/original_samples/disassociation.csv
@@ -124,7 +95,7 @@ The predictor can be downloaded at  https://pan.baidu.com/s/15Ifynpi2r_ABVGUNdaY
 Access code: tg9x  
 Download and get a zip package，unzip it ，find the predictor.exe and click it to run the predictor.  
 To facilitate online prediction, we have developed an online predictor based on Python.
-The predictor can be downloaded at 
+The pre-trained files for drug feature extraction can be downloaded from 
 ### How to Use Predictor
 First, click the "Select Model" button at the top of the interface and choose the local model file. The file format should be "pkl".  
 After selecting the model file, choose the prediction file. Click the "Select Data" button at the top of the interface and choose the local data file. The file format should be "csv".  
