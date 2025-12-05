@@ -91,11 +91,11 @@ python train_DDA.py
 ---
 ## About Predictor
 ### Download and Setup
-The predictor can be downloaded at  https://pan.baidu.com/s/15Ifynpi2r_ABVGUNdaYMug?pwd=tg9x 
+- The predictor can be downloaded at  https://pan.baidu.com/s/15Ifynpi2r_ABVGUNdaYMug?pwd=tg9x 
 Access code: tg9x  
 Download and get a zip package，unzip it ，find the predictor.exe and click it to run the predictor.  
 To facilitate online prediction, we have developed an online predictor based on Python.
-The pre-trained files for drug feature extraction can be downloaded from https://pan.baidu.com/s/11f68mQ96-sRCyw55WpWV8g 
+- The pre-trained files for drug feature extraction can be downloaded from https://pan.baidu.com/s/11f68mQ96-sRCyw55WpWV8g 
 Access code: nhtq
 ### How to Use Predictor
 First, click the "Select Model" button at the top of the interface and choose the local model file. The file format should be "pkl".  
